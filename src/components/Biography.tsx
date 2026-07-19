@@ -115,7 +115,7 @@ export function Biography() {
                 />
               </div>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                Iqra Madrasa — Sylhet
+               Family Picture — Birmingham
               </figcaption>
             </figure>
 
