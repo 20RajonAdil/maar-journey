@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://maar-journey-gamma.vercel.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/hero-image.jpg</image:loc>
+      <image:title>MD Adil Rajon</image:title>
+      <image:caption>MD Adil Rajon — MAAR Journey hero image</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/profile.jpg</image:loc>
+      <image:title>MD Adil Rajon — profile photo</image:title>
+      <image:caption>MD Adil Rajon</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/childhood.jpg</image:loc>
+      <image:title>Sylhet, Bangladesh — Early years</image:title>
+      <image:caption>Sylhet, Bangladesh — Early years</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/bangladesh.jpg</image:loc>
+      <image:title>Growing up in Sylhet, Bangladesh</image:title>
+      <image:caption>Growing up in Sylhet, Bangladesh</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/family.jpg</image:loc>
+      <image:title>Iqra Madrasa — Sylhet</image:title>
+      <image:caption>Iqra Madrasa — Sylhet</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/arm-fracture.jpg</image:loc>
+      <image:title>December 2020 — A fracture, a pause</image:title>
+      <image:caption>December 2020 — A fracture, a pause</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/uk-arrival.jpg</image:loc>
+      <image:title>30 July 2021 — Sylhet to London Heathrow</image:title>
+      <image:caption>30 July 2021 — Sylhet to London Heathrow</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/radisson.jpg</image:loc>
+      <image:title>Radisson Blu Edwardian — Heathrow, London</image:title>
+      <image:caption>Radisson Blu Edwardian — Heathrow, London</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/first-home.jpg</image:loc>
+      <image:title>Handsworth — first home in Birmingham</image:title>
+      <image:caption>Handsworth — first home in Birmingham</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/aston.jpg</image:loc>
+      <image:title>Aston, Birmingham — September 2022</image:title>
+      <image:caption>Aston, Birmingham — September 2022</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/iqra-madrasa.jpg</image:loc>
+      <image:title>Iqra Bangladesh School and Madrasa — Sylhet</image:title>
+      <image:caption>Iqra Bangladesh School and Madrasa — Sylhet</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/fortis-academy.jpg</image:loc>
+      <image:title>Fortis Academy — Albert Road, Birmingham</image:title>
+      <image:caption>Fortis Academy — Albert Road, Birmingham</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/gcse-years.jpg</image:loc>
+      <image:title>GCSE years — Years 10 and 11</image:title>
+      <image:caption>GCSE years — Years 10 and 11</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/coding.jpg</image:loc>
+      <image:title>Beginning the programming journey</image:title>
+      <image:caption>Beginning the programming journey</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://maar-journey-gamma.vercel.app/images/future.jpg</image:loc>
+      <image:title>Vision for the future</image:title>
+      <image:caption>Vision for the future</image:caption>
+    </image:image>
+  </url>
+</urlset>
