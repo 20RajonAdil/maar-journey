@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maar-journey-gamma.vercel.app/sitemap.xml
