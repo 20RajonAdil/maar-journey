@@ -2,6 +2,15 @@ import { motion } from 'framer-motion'
 
 const projects = [
   {
+  name: 'MAAR',
+  tag: '2026',
+  purpose: 'A premium web design and development studio for modern businesses.',
+  description:
+    'MAAR is a creative digital studio focused on designing fast, elegant, and conversion-driven websites. From strategy and branding to development and SEO, it helps businesses build a professional online presence with a timeless, premium experience.',
+  audience: 'Startups, small businesses, creators, and organisations seeking high-quality websites.',
+  href: 'https://maar-five.vercel.app/',
+},
+  {
     name: 'MAAR Quran',
     tag: '2025 — 2026',
     purpose: 'Quranic education — recitations, tafsir, and learning tips.',
