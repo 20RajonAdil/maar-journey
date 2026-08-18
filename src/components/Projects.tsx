@@ -17,7 +17,7 @@ const projects = [
     description:
       'Articles on the NoFap journey, a personal journey blog, resource links, and community-oriented pages — written to help young men (14–25) build self-discipline.',
     audience: 'Young men facing porn addiction',
-    href: 'https://20rajonadil.github.io/MAAR.Rnofap/',
+    href: 'https://20rajonadil.github.io/MAARnofap/',
   },
   {
     name: 'MAAR LIFE',
@@ -28,6 +28,14 @@ const projects = [
     audience: 'General audience — students, young professionals',
     href: 'https://20rajonadil.github.io/MAAR-LIFE/',
   },
+{
+  name: 'MAAR QR',
+  tag: '2025 — 2026',
+  purpose: 'A modern, fast, and accessible QR code generation tool.',
+  description:
+    'MAAR QR is a simple and professional web-based QR generator designed to make creating and sharing QR codes quick and effortless. Built with a clean interface and focused user experience, it provides an easy way to turn links and information into scannable QR codes.',
+  href: 'https://20rajonadil.github.io/MAAR-QR/',
+},
 ]
 
 const fadeInUp = {
