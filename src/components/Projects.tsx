@@ -34,6 +34,7 @@ const projects = [
   purpose: 'A modern, fast, and accessible QR code generation tool.',
   description:
     'MAAR QR is a simple and professional web-based QR generator designed to make creating and sharing QR codes quick and effortless. Built with a clean interface and focused user experience, it provides an easy way to turn links and information into scannable QR codes.',
+  audience: 'Individuals, businesses, and organisations looking for a simple QR solution.',
   href: 'https://20rajonadil.github.io/MAAR-QR/',
 },
 ]
