@@ -101,6 +101,13 @@ export function Contact() {
           <p className="text-xs text-gray-600">
             © {new Date().getFullYear()} MAAR Journey — The Biography of MD Adil Rajon.
           </p>
+          <p className="text-xs text-gray-600 text-center max-w-sm">
+            Accessibility: this site aims to meet WCAG 2.1 AA standards. Found a barrier? Email{' '}
+            <a href="mailto:rajonadil@gmail.com" className="underline hover:text-gray-400">
+              rajonadil@gmail.com
+            </a>
+            .
+          </p>
           <p className="text-xs text-gray-600">
             Sylhet · Birmingham
           </p>
