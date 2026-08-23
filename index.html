@@ -124,7 +124,9 @@
 </div>
 <style>
   #maar-app-launcher{position:fixed;top:14px;left:14px;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  #maar-launcher-btn{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(20,20,25,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:background .15s ease,transform .15s ease}
+  #maar-launcher-btn{width:30px;height:30px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(20,20,25,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:background .15s ease,transform .15s ease}
+  #maar-launcher-btn svg{width:15px;height:15px}
+  @media (max-width:768px){#maar-app-launcher{display:none}}
   #maar-launcher-btn:hover{background:rgba(35,35,42,0.7);transform:translateY(-1px)}
   #maar-launcher-panel{position:absolute;top:46px;left:0;width:260px;max-height:0;overflow:hidden;opacity:0;pointer-events:none;background:rgba(18,18,22,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,0.4);transition:max-height .22s ease,opacity .18s ease;padding:0 6px}
   #maar-app-launcher.open #maar-launcher-panel{max-height:420px;opacity:1;pointer-events:auto;padding:10px 6px}
