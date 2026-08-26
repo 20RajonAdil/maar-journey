@@ -23,6 +23,7 @@ export function Biography() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/childhood.jpg"
                   alt="Sylhet, Bangladesh — Early years"
                   loading="lazy"
@@ -63,6 +64,7 @@ export function Biography() {
           <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/bangladesh.jpg"
                   alt="Growing up in Sylhet, Bangladesh"
                   loading="lazy"
@@ -109,6 +111,7 @@ export function Biography() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/family.jpg"
                   alt="Iqra Madrasa — Sylhet"
                   loading="lazy"
@@ -129,6 +132,7 @@ export function Biography() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/arm-fracture.jpg"
                   alt="December 2020 — A fracture, a pause"
                   loading="lazy"

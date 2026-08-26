@@ -43,6 +43,7 @@ export function Journey() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/uk-arrival.jpg"
                   alt="30 July 2021 — Sylhet → London Heathrow"
                   loading="lazy"
@@ -73,6 +74,7 @@ export function Journey() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/radisson.jpg"
                   alt="Radisson Blu Edwardian — Heathrow, London"
                   loading="lazy"
@@ -92,6 +94,7 @@ export function Journey() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/first-home.jpg"
                   alt="Handsworth — first home in Birmingham"
                   loading="lazy"
@@ -137,6 +140,7 @@ export function Journey() {
             <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/aston.jpg"
                   alt="Aston, Birmingham — September 2022"
                   loading="lazy"

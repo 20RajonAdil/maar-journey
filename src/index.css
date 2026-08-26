@@ -57,6 +57,16 @@
     background-color: rgba(156, 163, 175, 0.3);
     color: #fafafa;
   }
+
+  /* Deter casual image copying — drag-out, text-select, and the iOS
+     long-press "Save Image" menu — across every photograph on the site. */
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 }
 
 /* Grain/Noise Overlay */

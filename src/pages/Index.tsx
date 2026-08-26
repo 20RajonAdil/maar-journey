@@ -1,5 +1,6 @@
 import { Navigation } from '@/components/Navigation'
 import { GrainOverlay } from '@/components/GrainOverlay'
+import { ImageProtection } from '@/components/ImageProtection'
 import { Hero } from '@/components/Hero'
 import { Biography } from '@/components/Biography'
 import { Journey } from '@/components/Journey'
@@ -19,6 +20,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <GrainOverlay />
+      <ImageProtection />
       <Navigation />
       <main>
         <Hero />

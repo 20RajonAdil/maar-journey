@@ -48,6 +48,7 @@ export function ResilientImage({
       loading={loading}
       onClick={onClick}
       onError={() => setErrored(true)}
+      draggable={false}
       className={className}
     />
   )

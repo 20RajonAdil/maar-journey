@@ -31,6 +31,7 @@ export function Education() {
               <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/iqra-madrasa.jpg"
                   alt="Iqra Bangladesh School and Madrasa — Sylhet"
                   loading="lazy"
@@ -89,6 +90,7 @@ export function Education() {
               <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/fortis-academy.jpg"
                   alt="Fortis Academy — Albert Road, Birmingham"
                   loading="lazy"
@@ -109,6 +111,7 @@ export function Education() {
               <figure>
               <TiltFrame>
                 <img
+                  draggable={false}
                   src="/images/gcse-years.jpg"
                   alt="GCSE years — Years 10 & 11"
                   loading="lazy"

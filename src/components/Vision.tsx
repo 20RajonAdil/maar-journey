@@ -27,6 +27,7 @@ export function Vision() {
         <motion.figure {...fadeInUp} className="mb-12 lg:mb-16">
           <TiltFrame>
             <img
+              draggable={false}
               src="/images/future.jpg"
               alt="Vision for the future"
               loading="lazy"

@@ -36,6 +36,7 @@ export function Skills() {
         <motion.figure {...fadeInUp} className="mb-16 lg:mb-24">
           <TiltFrame>
             <img
+              draggable={false}
               src="/images/coding.jpg"
               alt="Beginning the programming journey"
               loading="lazy"

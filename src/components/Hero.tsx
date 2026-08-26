@@ -71,6 +71,7 @@ export function Hero() {
           >
             <TiltFrame>
               <img
+                draggable={false}
                 src="/images/profile.jpg"
                 alt="MD Adil Rajon"
                 className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
