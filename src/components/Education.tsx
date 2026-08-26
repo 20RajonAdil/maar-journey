@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -28,14 +29,14 @@ export function Education() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
             <motion.div {...fadeInUp}>
               <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/iqra-madrasa.jpg"
                   alt="Iqra Bangladesh School and Madrasa — Sylhet"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Iqra Bangladesh School and Madrasa — Sylhet
               </figcaption>
@@ -86,14 +87,14 @@ export function Education() {
               className="lg:order-1"
             >
               <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/fortis-academy.jpg"
                   alt="Fortis Academy — Albert Road, Birmingham"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Fortis Academy — Albert Road, Birmingham
               </figcaption>
@@ -106,14 +107,14 @@ export function Education() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
             <motion.div {...fadeInUp}>
               <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/gcse-years.jpg"
                   alt="GCSE years — Years 10 & 11"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 GCSE years — Years 10 & 11
               </figcaption>

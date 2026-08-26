@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -40,14 +41,14 @@ export function Journey() {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/uk-arrival.jpg"
                   alt="30 July 2021 — Sylhet → London Heathrow"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 30 July 2021 — Sylhet → London Heathrow
               </figcaption>
@@ -70,14 +71,14 @@ export function Journey() {
           </p>
           <div className="mt-12 lg:mt-16">
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/radisson.jpg"
                   alt="Radisson Blu Edwardian — Heathrow, London"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Radisson Blu Edwardian — Heathrow, London
               </figcaption>
@@ -89,14 +90,14 @@ export function Journey() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
           <motion.div {...fadeInUp}>
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/first-home.jpg"
                   alt="Handsworth — first home in Birmingham"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Handsworth — first home in Birmingham
               </figcaption>
@@ -134,14 +135,14 @@ export function Journey() {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/aston.jpg"
                   alt="Aston, Birmingham — September 2022"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Aston, Birmingham — September 2022
               </figcaption>

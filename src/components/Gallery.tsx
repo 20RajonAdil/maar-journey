@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ResilientImage } from './ResilientImage'
+import { TiltFrame } from './TiltFrame'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -105,11 +106,13 @@ export function Gallery() {
               className="group mb-4 lg:mb-5 block w-full break-inside-avoid overflow-hidden bg-[#0a0a0a] text-left cursor-zoom-in"
               aria-label={`View photograph: ${photo.caption}`}
             >
-              <ResilientImage
-                src={photo.src}
-                alt={photo.alt}
-                className="w-full h-auto block grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
-              />
+              <TiltFrame maxTilt={6} hoverScale={1.04} background="transparent">
+                <ResilientImage
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-auto block grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+              </TiltFrame>
             </motion.button>
           ))}
         </div>

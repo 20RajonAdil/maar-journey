@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 
 const technical = ['HTML', 'CSS', 'JavaScript', 'Basic Python', 'Video Editing', 'Git & GitHub']
 const creative = ['Web Design', 'Drama', 'Prompt Engineering', 'Presentation', 'Communication']
@@ -33,14 +34,14 @@ export function Skills() {
         </motion.h2>
 
         <motion.figure {...fadeInUp} className="mb-16 lg:mb-24">
-          <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+          <TiltFrame>
             <img
               src="/images/coding.jpg"
               alt="Beginning the programming journey"
               loading="lazy"
               className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
             />
-          </div>
+          </TiltFrame>
           <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
             Beginning the programming journey
           </figcaption>

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 
 export function Hero() {
   return (
@@ -68,13 +69,13 @@ export function Hero() {
             transition={{ delay: 0.4, duration: 1, ease: 'easeOut' }}
             className="hidden md:block w-[260px] lg:w-[320px]"
           >
-            <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+            <TiltFrame>
               <img
                 src="/images/profile.jpg"
                 alt="MD Adil Rajon"
                 className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
               />
-            </div>
+            </TiltFrame>
             <p className="mt-4 text-[10px] tracking-[0.25em] text-white/40 uppercase">
               Portrait · MD Adil Rajon
             </p>

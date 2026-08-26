@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -20,14 +21,14 @@ export function Biography() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-24 lg:mb-32">
           <motion.div {...fadeInUp} className="order-2 lg:order-1">
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/childhood.jpg"
                   alt="Sylhet, Bangladesh — Early years"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Sylhet, Bangladesh — Early years
               </figcaption>
@@ -60,14 +61,14 @@ export function Biography() {
         {/* Growing up in Sylhet — full-width */}
         <motion.div {...fadeInUp} className="mb-24 lg:mb-32">
           <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/bangladesh.jpg"
                   alt="Growing up in Sylhet, Bangladesh"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 Growing up in Sylhet, Bangladesh
               </figcaption>
@@ -106,14 +107,14 @@ export function Biography() {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/family.jpg"
                   alt="Iqra Madrasa — Sylhet"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                Family Picture — Birmingham
               </figcaption>
@@ -126,14 +127,14 @@ export function Biography() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
           <motion.div {...fadeInUp}>
             <figure>
-              <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+              <TiltFrame>
                 <img
                   src="/images/arm-fracture.jpg"
                   alt="December 2020 — A fracture, a pause"
                   loading="lazy"
                   className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                 />
-              </div>
+              </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                 December 2020 — A fracture, a pause
               </figcaption>

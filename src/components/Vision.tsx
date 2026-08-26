@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -24,14 +25,14 @@ export function Vision() {
         </motion.h2>
 
         <motion.figure {...fadeInUp} className="mb-12 lg:mb-16">
-          <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+          <TiltFrame>
             <img
               src="/images/future.jpg"
               alt="Vision for the future"
               loading="lazy"
               className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
             />
-          </div>
+          </TiltFrame>
           <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
             Vision for the future
           </figcaption>

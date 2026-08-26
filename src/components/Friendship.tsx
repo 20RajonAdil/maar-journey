@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { TiltFrame } from './TiltFrame'
 import { ResilientImage } from './ResilientImage'
 
 const fadeInUp = {
@@ -41,13 +42,13 @@ export function Friendship() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
             <motion.div {...fadeInUp}>
               <figure>
-                <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+                <TiltFrame>
                   <ResilientImage
                     src="/images/friendship1.jpg"
                     alt="Ifnan — a friendship that found its way back"
                     className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                   />
-                </div>
+                </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                   Ifnan — Fortis Academy to BMet College
                 </figcaption>
@@ -150,13 +151,13 @@ export function Friendship() {
               className="lg:order-1"
             >
               <figure>
-                <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+                <TiltFrame>
                   <ResilientImage
                     src="/images/friendship2.jpg"
                     alt="Talha — a friend built on loyalty"
                     className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                   />
-                </div>
+                </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                   Talha — met at college enrolment
                 </figcaption>
@@ -168,13 +169,13 @@ export function Friendship() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
             <motion.div {...fadeInUp}>
               <figure>
-                <div className="relative w-full overflow-hidden bg-[#0a0a0a] flex items-center justify-center">
+                <TiltFrame>
                   <ResilientImage
                     src="/images/friendship3.jpg"
                     alt="Moheiz — a friendship built on understanding"
                     className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                   />
-                </div>
+                </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
                   Moheiz — second week of college
                 </figcaption>
