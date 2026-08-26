@@ -35,7 +35,7 @@ const photos: GalleryPhoto[] = [
   { src: '/images/coding.jpg', alt: 'Beginning the programming journey', caption: 'Beginning the programming journey' },
   { src: '/images/friendship1.jpg', alt: 'Ifnan — a friendship that found its way back', caption: 'Ifnan — Chapter Eleven, Friendship' },
   { src: '/images/friendship2.jpg', alt: 'Talha — a friend built on loyalty', caption: 'Talha — Chapter Eleven, Friendship' },
-  { src: '/images/friendship3.jpg', alt: 'Moheiz — a friendship built on understanding', caption: 'Moheiz — Chapter Eleven, Friendship' },
+  { src: '/images/friendship3.jpg', alt: 'Mohaiz — a friendship built on understanding', caption: 'Mohaiz — Chapter Eleven, Friendship' },
   { src: '/images/future.jpg', alt: 'Vision for the future', caption: 'Vision for the future' },
 ]
 

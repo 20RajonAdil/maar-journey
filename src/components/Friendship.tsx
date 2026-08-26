@@ -34,7 +34,7 @@ export function Friendship() {
           became genuinely close and trusted friends. Each friendship developed in its
           own way, through conversations, shared experiences, support, and the simple
           moments of spending time together. Among those friendships, Ifnan, Talha, and
-          Moheiz became three of the closest people in his life.
+          Mohaiz became three of the closest people in his life.
         </motion.p>
 
         <div className="space-y-24 lg:space-y-32">
@@ -165,19 +165,19 @@ export function Friendship() {
             </motion.div>
           </div>
 
-          {/* Moheiz */}
+          {/* Mohaiz */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
             <motion.div {...fadeInUp}>
               <figure>
                 <TiltFrame>
                   <ResilientImage
                     src="/images/friendship3.jpg"
-                    alt="Moheiz — a friendship built on understanding"
+                    alt="Mohaiz — a friendship built on understanding"
                     className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
                   />
                 </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
-                  Moheiz — second week of college
+                  Mohaiz — second week of college
                 </figcaption>
               </figure>
             </motion.div>
@@ -189,32 +189,32 @@ export function Friendship() {
             >
               <div>
                 <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
-                  Moheiz — A Friendship Built on Understanding
+                  Mohaiz — A Friendship Built on Understanding
                 </h3>
                 <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  Moheiz became part of Adil's life around the second week of college. At
+                  Mohaiz became part of Adil's life around the second week of college. At
                   that time, Adil was looking to make new friends and build connections in
-                  his new environment. Among the people he met, Moheiz quickly became
+                  his new environment. Among the people he met, Mohaiz quickly became
                   someone he felt comfortable around.
                 </p>
                 <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
                   Their friendship developed through spending time together in class,
                   sitting next to each other, talking, and sharing different experiences.
-                  Moheiz became someone Adil could be open with without feeling judged for
+                  Mohaiz became someone Adil could be open with without feeling judged for
                   who he was. He listened to Adil when he had problems, discussed those
                   problems with him, and offered ideas or possible solutions.
                 </p>
                 <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
                   They also developed a strong connection through the way they think. Adil
-                  and Moheiz often understand things in a similar way. Their logic, approach
+                  and Mohaiz often understand things in a similar way. Their logic, approach
                   to ideas, and even parts of their philosophy are similar, which makes it
                   easy for them to understand one another and exchange thoughts.
                 </p>
                 <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
-                  Moheiz has also played a small but meaningful role in Adil's creative
-                  ideas. Although Moheiz does not do web development himself, he is always
+                  Mohaiz has also played a small but meaningful role in Adil's creative
+                  ideas. Although Mohaiz does not do web development himself, he is always
                   willing to give Adil ideas when asked. When Adil is thinking about website
-                  designs, features, or other MAAR-related projects, Moheiz can offer
+                  designs, features, or other MAAR-related projects, Mohaiz can offer
                   suggestions and another perspective. His contribution comes through ideas
                   and conversations rather than through actually developing the websites.
                 </p>
@@ -225,7 +225,7 @@ export function Friendship() {
                   their friendship.
                 </p>
                 <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
-                  For Adil, one of the most valuable things about Moheiz is the feeling of
+                  For Adil, one of the most valuable things about Mohaiz is the feeling of
                   being understood. Their similar way of thinking makes their friendship
                   different from many others, because they can often understand where the
                   other person is coming from without needing to explain everything.
@@ -242,7 +242,7 @@ export function Friendship() {
           </h3>
 
           <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-6">
-            The friendships with Ifnan, Talha, and Moheiz are three different stories,
+            The friendships with Ifnan, Talha, and Mohaiz are three different stories,
             but each has its own place in the MAAR Journey.
           </p>
 
@@ -250,7 +250,7 @@ export function Friendship() {
             Ifnan represents a friendship that began in school, went through a period of
             distance, and eventually found its way back in college. Talha represents a
             friendship built from a simple first meeting and strengthened through loyalty,
-            communication, and reliability. Moheiz represents a friendship built through
+            communication, and reliability. Mohaiz represents a friendship built through
             trust, openness, shared experiences, and a similar way of thinking.
           </p>
 
