@@ -10,6 +10,8 @@ const navItems = [
   { id: 'faith', label: 'Faith' },
   { id: 'projects', label: 'Projects' },
   { id: 'timeline', label: 'Timeline' },
+  { id: 'friendship', label: 'Friendship' },
+  { id: 'gallery', label: 'Gallery' },
   { id: 'contact', label: 'Contact' },
 ]
 

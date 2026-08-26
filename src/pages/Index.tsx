@@ -11,6 +11,8 @@ import { Skills } from '@/components/Skills'
 import { Achievements } from '@/components/Achievements'
 import { Timeline } from '@/components/Timeline'
 import { Vision } from '@/components/Vision'
+import { Friendship } from '@/components/Friendship'
+import { Gallery } from '@/components/Gallery'
 import { Contact } from '@/components/Contact'
 
 export default function Index() {
@@ -30,6 +32,8 @@ export default function Index() {
         <Achievements />
         <Timeline />
         <Vision />
+        <Friendship />
+        <Gallery />
         <Contact />
       </main>
     </div>

@@ -12,6 +12,8 @@ const sections = [
   'achievements',
   'timeline',
   'vision',
+  'friendship',
+  'gallery',
   'contact',
 ]
 
