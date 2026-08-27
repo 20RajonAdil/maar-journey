@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import Counter from './Counter'
 
 // 20 August 2009
 const BIRTH_MONTH = 7 // 0-indexed: August
@@ -9,6 +10,7 @@ interface BirthdayInfo {
   age: number
   progress: number // 0 (just had a birthday) -> 1 (birthday is today/about to happen)
   daysRemaining: number
+  hoursRemaining: number
 }
 
 function getBirthdayInfo(now: Date): BirthdayInfo {
@@ -26,48 +28,12 @@ function getBirthdayInfo(now: Date): BirthdayInfo {
   const elapsedMs = now.getTime() - lastBirthday.getTime()
   const progress = Math.min(Math.max(elapsedMs / totalMs, 0), 1)
 
-  const daysRemaining = Math.max(
-    Math.ceil((nextBirthday.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)),
-    0
-  )
+  const msRemaining = Math.max(nextBirthday.getTime() - now.getTime(), 0)
+  const dayMs = 1000 * 60 * 60 * 24
+  const daysRemaining = Math.floor(msRemaining / dayMs)
+  const hoursRemaining = Math.floor((msRemaining % dayMs) / (1000 * 60 * 60))
 
-  return { age, progress, daysRemaining }
-}
-
-function DigitRoller({ digit, fontSize }: { digit: number; fontSize: number }) {
-  const rowHeight = fontSize * 1.08
-  return (
-    <div
-      className="relative overflow-hidden"
-      style={{ height: rowHeight, width: fontSize * 0.66 }}
-    >
-      <motion.div
-        animate={{ y: -digit * rowHeight }}
-        transition={{ type: 'spring', stiffness: 170, damping: 24 }}
-      >
-        {Array.from({ length: 10 }, (_, i) => (
-          <div
-            key={i}
-            className="font-display text-white flex items-center justify-center"
-            style={{ height: rowHeight, fontSize, lineHeight: `${rowHeight}px` }}
-          >
-            {i}
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  )
-}
-
-function AgeNumber({ age, fontSize }: { age: number; fontSize: number }) {
-  const digits = String(age).split('').map(Number)
-  return (
-    <div className="flex" style={{ gap: fontSize * 0.04 }}>
-      {digits.map((d, i) => (
-        <DigitRoller key={i} digit={d} fontSize={fontSize} />
-      ))}
-    </div>
-  )
+  return { age, progress, daysRemaining, hoursRemaining }
 }
 
 function ProgressRing({
@@ -116,11 +82,12 @@ function ProgressRing({
 }
 
 /**
- * A quiet, self-updating badge showing Adil's current age — an odometer-style
- * rolling digit inside a thin ring that empties anticlockwise as the year
- * runs from one birthday (20 August) to the next, resetting the moment the
- * next birthday arrives (the ring refills and the age ticks up automatically,
- * purely from the date — no manual update ever needed).
+ * A quiet, self-updating badge showing Adil's current age — the React Bits
+ * "Counter" slot-machine digit roll (https://reactbits.dev/components/counter)
+ * inside a thin ring that empties anticlockwise as the year runs from one
+ * birthday (20 August) to the next, resetting the moment the next birthday
+ * arrives. Below it, a live Days/Hours countdown to the next birthday uses
+ * the same rolling-digit counter.
  */
 export function BirthdayCounter() {
   const [info, setInfo] = useState<BirthdayInfo>(() => getBirthdayInfo(new Date()))
@@ -128,7 +95,7 @@ export function BirthdayCounter() {
   useEffect(() => {
     const update = () => setInfo(getBirthdayInfo(new Date()))
     update()
-    const interval = setInterval(update, 60 * 1000)
+    const interval = setInterval(update, 1000)
     return () => clearInterval(interval)
   }, [])
 
@@ -147,13 +114,62 @@ export function BirthdayCounter() {
 
         <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
           <ProgressRing progress={info.progress} size={size} />
-          <AgeNumber age={info.age} fontSize={64} />
+          <Counter
+            value={info.age}
+            fontSize={64}
+            padding={2}
+            gap={2}
+            textColor="white"
+            fontWeight={900}
+            gradientHeight={0}
+            gradientFrom="transparent"
+            gradientTo="transparent"
+            horizontalPadding={0}
+          />
         </div>
 
-        <span className="mt-6 text-xs text-gray-500 tracking-widest uppercase text-center">
-          {info.daysRemaining === 0
-            ? 'Happy birthday, Adil'
-            : `${info.daysRemaining} day${info.daysRemaining === 1 ? '' : 's'} until 20 August`}
+        {info.daysRemaining === 0 && info.hoursRemaining === 0 ? (
+          <span className="mt-8 text-xs text-gray-500 tracking-widest uppercase text-center">
+            Happy birthday, Adil
+          </span>
+        ) : (
+          <div className="mt-8 flex items-start gap-8">
+            <div className="flex flex-col items-center">
+              <Counter
+                value={info.daysRemaining}
+                places={[100, 10, 1]}
+                fontSize={28}
+                padding={2}
+                gap={2}
+                textColor="white"
+                fontWeight={700}
+                gradientHeight={0}
+                gradientFrom="transparent"
+                gradientTo="transparent"
+                horizontalPadding={0}
+              />
+              <span className="mt-2 text-[10px] text-gray-500 tracking-[0.25em] uppercase">Days</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Counter
+                value={info.hoursRemaining}
+                places={[10, 1]}
+                fontSize={28}
+                padding={2}
+                gap={2}
+                textColor="white"
+                fontWeight={700}
+                gradientHeight={0}
+                gradientFrom="transparent"
+                gradientTo="transparent"
+                horizontalPadding={0}
+              />
+              <span className="mt-2 text-[10px] text-gray-500 tracking-[0.25em] uppercase">Hours</span>
+            </div>
+          </div>
+        )}
+        <span className="mt-4 text-[10px] text-gray-600 tracking-[0.25em] uppercase text-center">
+          Until 20 August
         </span>
       </motion.div>
     </section>
