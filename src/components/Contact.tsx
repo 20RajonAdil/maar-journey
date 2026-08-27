@@ -19,7 +19,7 @@ const links = [
   {
     label: 'MAAR NoFap',
     value: 'Open project',
-    href: 'https://20rajonadil.github.io/MAAR.Rnofap/',
+    href: 'https://20rajonadil.github.io/MAARRnofap/',
   },
   {
     label: 'MAAR LIFE',
