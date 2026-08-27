@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SplitText from './SplitText'
 
 const challenges = [
   {
@@ -43,12 +44,19 @@ export function Challenges() {
           <div className="w-6 h-px bg-gray-600 mt-2" />
         </motion.div>
 
-        <motion.h2
-          {...fadeInUp}
+        <SplitText
+          as="h2"
+          text={"RESILIENCE,\nQUIETLY BUILT"}
           className="font-display text-[10vw] lg:text-section leading-none tracking-tight mb-12 lg:mb-20"
-        >
-          RESILIENCE,<br />QUIETLY BUILT
-        </motion.h2>
+          splitType="chars"
+          delay={30}
+          duration={0.6}
+          ease="power3.out"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+          textAlign="left"
+        />
 
         <motion.p
           {...fadeInUp}

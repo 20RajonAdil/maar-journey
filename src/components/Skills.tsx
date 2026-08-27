@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SplitText from './SplitText'
 import { TiltFrame } from './TiltFrame'
 
 const technical = ['HTML', 'CSS', 'JavaScript', 'Basic Python', 'Video Editing', 'Git & GitHub']
@@ -26,12 +27,19 @@ export function Skills() {
           <div className="w-6 h-px bg-gray-600 mt-2" />
         </motion.div>
 
-        <motion.h2
-          {...fadeInUp}
+        <SplitText
+          as="h2"
+          text={"A QUIET\nTOOLBOX"}
           className="font-display text-[10vw] lg:text-section leading-none tracking-tight mb-12 lg:mb-16"
-        >
-          A QUIET<br />TOOLBOX
-        </motion.h2>
+          splitType="chars"
+          delay={30}
+          duration={0.6}
+          ease="power3.out"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+          textAlign="left"
+        />
 
         <motion.figure {...fadeInUp} className="mb-16 lg:mb-24">
           <TiltFrame>

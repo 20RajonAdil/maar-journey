@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import SplitText from './SplitText'
 
 interface Milestone {
   date: string
@@ -101,12 +102,19 @@ export function Timeline() {
           <div className="w-6 h-px bg-gray-600 mt-2" />
         </motion.div>
 
-        <motion.h2
-          {...fadeInUp}
+        <SplitText
+          as="h2"
+          text={"KEY\nEVENTS"}
           className="font-display text-[10vw] lg:text-section leading-none tracking-tight mb-16 lg:mb-24"
-        >
-          KEY<br />EVENTS
-        </motion.h2>
+          splitType="chars"
+          delay={30}
+          duration={0.6}
+          ease="power3.out"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+          textAlign="left"
+        />
 
         <div className="relative">
           {/* Vertical line */}

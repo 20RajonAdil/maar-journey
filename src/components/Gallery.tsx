@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import SplitText from './SplitText'
 import { ResilientImage } from './ResilientImage'
 import { TiltFrame } from './TiltFrame'
 
@@ -75,12 +76,19 @@ export function Gallery() {
           <div className="w-6 h-px bg-gray-600 mt-2" />
         </motion.div>
 
-        <motion.h2
-          {...fadeInUp}
+        <SplitText
+          as="h2"
+          text={"MOMENTS\nIN FRAME"}
           className="font-display text-[10vw] lg:text-section leading-none tracking-tight mb-8 lg:mb-12"
-        >
-          MOMENTS<br />IN FRAME
-        </motion.h2>
+          splitType="chars"
+          delay={30}
+          duration={0.6}
+          ease="power3.out"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+          textAlign="left"
+        />
 
         <motion.p
           {...fadeInUp}

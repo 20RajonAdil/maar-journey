@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SplitText from './SplitText'
 
 const achievements = [
   {
@@ -46,12 +47,19 @@ export function Achievements() {
           <div className="w-6 h-px bg-gray-600 mt-2" />
         </motion.div>
 
-        <motion.h2
-          {...fadeInUp}
+        <SplitText
+          as="h2"
+          text={"MARKERS\nALONG THE WAY"}
           className="font-display text-[10vw] lg:text-section leading-none tracking-tight mb-16 lg:mb-24"
-        >
-          MARKERS<br />ALONG THE WAY
-        </motion.h2>
+          splitType="chars"
+          delay={30}
+          duration={0.6}
+          ease="power3.out"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+          textAlign="left"
+        />
 
         <div className="space-y-12 lg:space-y-16">
           {achievements.map((group, gIndex) => (

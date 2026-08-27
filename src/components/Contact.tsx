@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SplitText from './SplitText'
 
 const links = [
   {
@@ -44,15 +45,19 @@ export function Contact() {
           <div className="w-6 h-px bg-gray-600 mt-2" />
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+        <SplitText
+          as="h2"
+          text="Get in touch"
           className="font-display text-[12vw] lg:text-hero leading-none tracking-tight mb-8"
-        >
-          Get in touch
-        </motion.h2>
+          splitType="chars"
+          delay={30}
+          duration={0.8}
+          ease="power3.out"
+          from={{ opacity: 0, y: 60 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.2}
+          textAlign="left"
+        />
 
         <motion.div {...fadeInUp} className="w-full h-px bg-gray-700 mb-12 lg:mb-16" />
 
