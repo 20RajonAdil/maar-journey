@@ -2,6 +2,7 @@ import { Navigation } from '@/components/Navigation'
 import { GrainOverlay } from '@/components/GrainOverlay'
 import { ImageProtection } from '@/components/ImageProtection'
 import { Hero } from '@/components/Hero'
+import { BirthdayCounter } from '@/components/BirthdayCounter'
 import { Biography } from '@/components/Biography'
 import { Journey } from '@/components/Journey'
 import { Education } from '@/components/Education'
@@ -24,6 +25,7 @@ export default function Index() {
       <Navigation />
       <main>
         <Hero />
+        <BirthdayCounter />
         <Biography />
         <Journey />
         <Education />
