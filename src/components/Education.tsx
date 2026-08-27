@@ -35,7 +35,7 @@ export function Education() {
                   src="/images/iqra-madrasa.jpg"
                   alt="Iqra Bangladesh School and Madrasa — Sylhet"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -94,7 +94,7 @@ export function Education() {
                   src="/images/fortis-academy.jpg"
                   alt="Fortis Academy — Albert Road, Birmingham"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -115,7 +115,7 @@ export function Education() {
                   src="/images/gcse-years.jpg"
                   alt="GCSE years — Years 10 & 11"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">

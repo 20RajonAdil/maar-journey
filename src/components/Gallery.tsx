@@ -106,7 +106,7 @@ export function Gallery() {
               className="group mb-4 lg:mb-5 block w-full break-inside-avoid overflow-hidden bg-[#0a0a0a] text-left cursor-zoom-in"
               aria-label={`View photograph: ${photo.caption}`}
             >
-              <TiltFrame maxTilt={6} hoverScale={1.04} background="transparent">
+              <TiltFrame maxTilt={6} hoverScale={1.04} background="transparent" manageGrayscale={false}>
                 <ResilientImage
                   src={photo.src}
                   alt={photo.alt}

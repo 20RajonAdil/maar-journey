@@ -27,7 +27,7 @@ export function Biography() {
                   src="/images/childhood.jpg"
                   alt="Sylhet, Bangladesh — Early years"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -68,7 +68,7 @@ export function Biography() {
                   src="/images/bangladesh.jpg"
                   alt="Growing up in Sylhet, Bangladesh"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -115,7 +115,7 @@ export function Biography() {
                   src="/images/family.jpg"
                   alt="Iqra Madrasa — Sylhet"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -136,7 +136,7 @@ export function Biography() {
                   src="/images/arm-fracture.jpg"
                   alt="December 2020 — A fracture, a pause"
                   loading="lazy"
-                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                 />
               </TiltFrame>
               <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">

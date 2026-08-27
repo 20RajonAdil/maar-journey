@@ -46,7 +46,7 @@ export function Friendship() {
                   <ResilientImage
                     src="/images/friendship1.jpg"
                     alt="Ifnan — a friendship that found its way back"
-                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                   />
                 </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -155,7 +155,7 @@ export function Friendship() {
                   <ResilientImage
                     src="/images/friendship2.jpg"
                     alt="Talha — a friend built on loyalty"
-                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                   />
                 </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
@@ -173,7 +173,7 @@ export function Friendship() {
                   <ResilientImage
                     src="/images/friendship3.jpg"
                     alt="Mohaiz — a friendship built on understanding"
-                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
                   />
                 </TiltFrame>
                 <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">

@@ -1,5 +1,11 @@
 import { useRef } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useMotionTemplate,
+} from 'framer-motion'
 
 interface TiltFrameProps {
   children: React.ReactNode
@@ -10,14 +16,22 @@ interface TiltFrameProps {
   hoverScale?: number
   /** Frame backdrop shown while an image loads. Pass 'transparent' to omit it. */
   background?: string
+  /**
+   * Whether this frame owns the grayscale-to-colour reveal: hover on
+   * desktop, tap-to-toggle on touch (since touch devices have no hover
+   * state to trigger it). Set false where a parent already handles its
+   * own reveal — e.g. the Gallery grid, whose thumbnails should open the
+   * lightbox on a single tap rather than toggle colour first.
+   */
+  manageGrayscale?: boolean
 }
 
 /**
- * Wraps a photograph so it responds to the cursor with a gentle 3D tilt and
- * a light glare sweep — the same interactive spirit as the site's existing
- * grayscale-to-colour hover, just with a bit of depth. Used as a drop-in
- * replacement for the plain image-frame <div> used throughout the site.
- * Disabled automatically on touch devices, where hover doesn't apply.
+ * Wraps a photograph so it responds to the cursor with a gentle 3D tilt, a
+ * light glare sweep, and a black-and-white-to-colour reveal — on desktop
+ * that reveal happens on hover; on touch devices (which have no hover) a
+ * single tap toggles it instead. Used as a drop-in replacement for the
+ * plain image-frame <div> used throughout the site.
  */
 export function TiltFrame({
   children,
@@ -25,8 +39,10 @@ export function TiltFrame({
   maxTilt = 8,
   hoverScale = 1.035,
   background = '#0a0a0a',
+  manageGrayscale = true,
 }: TiltFrameProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const revealed = useRef(false)
 
   const px = useMotionValue(0.5)
   const py = useMotionValue(0.5)
@@ -38,6 +54,13 @@ export function TiltFrame({
   const glareX = useTransform(px, [0, 1], ['0%', '100%'])
   const glareY = useTransform(py, [0, 1], ['0%', '100%'])
   const glareOpacity = useSpring(0, springConfig)
+
+  // 1 = fully black-and-white, 0 = full colour.
+  const grayscaleAmount = useSpring(manageGrayscale ? 1 : 0, {
+    stiffness: 180,
+    damping: 24,
+  })
+  const filter = useMotionTemplate`grayscale(${grayscaleAmount})`
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === 'touch') return
@@ -51,6 +74,7 @@ export function TiltFrame({
     if (e.pointerType === 'touch') return
     scale.set(hoverScale)
     glareOpacity.set(1)
+    if (manageGrayscale) grayscaleAmount.set(0)
   }
 
   const handlePointerLeave = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -59,6 +83,19 @@ export function TiltFrame({
     py.set(0.5)
     scale.set(1)
     glareOpacity.set(0)
+    if (manageGrayscale) grayscaleAmount.set(1)
+  }
+
+  // Touch devices have no hover state, so a tap toggles the reveal instead.
+  const handleClick = () => {
+    if (!manageGrayscale) return
+    const isCoarsePointer =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(hover: none), (pointer: coarse)').matches
+    if (!isCoarsePointer) return
+    revealed.current = !revealed.current
+    grayscaleAmount.set(revealed.current ? 0 : 1)
+    scale.set(revealed.current ? hoverScale : 1)
   }
 
   return (
@@ -67,11 +104,12 @@ export function TiltFrame({
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
+      onClick={handleClick}
       className={`relative w-full overflow-hidden flex items-center justify-center [perspective:1200px] ${className}`}
       style={{ background }}
     >
       <motion.div
-        style={{ rotateX, rotateY, scale, transformStyle: 'preserve-3d' }}
+        style={{ rotateX, rotateY, scale, transformStyle: 'preserve-3d', filter }}
         className="relative w-full h-full flex items-center justify-center will-change-transform"
       >
         {children}

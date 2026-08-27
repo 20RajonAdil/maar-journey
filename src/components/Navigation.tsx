@@ -31,11 +31,11 @@ export function Navigation() {
   return (
     <>
       {/* Mobile Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-start md:hidden">
+      <div className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-start md:hidden pointer-events-none">
         <div className="relative">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-sm text-white mix-blend-difference"
+            className="text-sm text-white mix-blend-difference pointer-events-auto"
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? 'Close' : 'Menu'}
@@ -45,7 +45,7 @@ export function Navigation() {
             className={cn(
               'flex flex-col items-start gap-3 mt-6 transition-all duration-300',
               mobileMenuOpen
-                ? 'opacity-100 translate-y-0'
+                ? 'opacity-100 translate-y-0 pointer-events-auto'
                 : 'opacity-0 -translate-y-4 pointer-events-none'
             )}
           >
@@ -73,17 +73,17 @@ export function Navigation() {
       </div>
 
       {/* Desktop brand mark — top left */}
-      <div className="hidden md:block fixed top-0 left-0 z-50 p-6 md:p-10">
+      <div className="hidden md:block fixed top-0 left-0 z-50 p-6 md:p-10 pointer-events-none">
         <button
           onClick={() => scrollToSection('home')}
-          className="text-xs tracking-[0.35em] text-white mix-blend-difference uppercase hover:opacity-60 transition-opacity"
+          className="text-xs tracking-[0.35em] text-white mix-blend-difference uppercase hover:opacity-60 transition-opacity pointer-events-auto"
         >
           MAAR Journey
         </button>
       </div>
 
       {/* Desktop brand kicker — top right */}
-      <div className="hidden md:block fixed top-0 right-0 z-50 p-6 md:p-10">
+      <div className="hidden md:block fixed top-0 right-0 z-50 p-6 md:p-10 pointer-events-none">
         <span className="text-xs tracking-[0.3em] text-white mix-blend-difference uppercase">
           The Biography of MD Adil Rajon
         </span>

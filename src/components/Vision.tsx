@@ -31,7 +31,7 @@ export function Vision() {
               src="/images/future.jpg"
               alt="Vision for the future"
               loading="lazy"
-              className="w-auto h-auto max-w-full max-h-[70vh] object-contain grayscale hover:grayscale-0 transition-all duration-700"
+              className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
             />
           </TiltFrame>
           <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
