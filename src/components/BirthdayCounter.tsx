@@ -9,9 +9,17 @@ const BIRTH_DAY = 20
 interface BirthdayInfo {
   age: number
   progress: number // 0 (just had a birthday) -> 1 (birthday is today/about to happen)
+  msRemaining: number
   daysRemaining: number
   hoursRemaining: number
+  minutesRemaining: number
+  secondsRemaining: number
+  millisecondsRemaining: number
 }
+
+const DAY_MS = 1000 * 60 * 60 * 24
+const HOUR_MS = 1000 * 60 * 60
+const MINUTE_MS = 1000 * 60
 
 function getBirthdayInfo(now: Date): BirthdayInfo {
   const hadBirthdayThisYear =
@@ -29,11 +37,17 @@ function getBirthdayInfo(now: Date): BirthdayInfo {
   const progress = Math.min(Math.max(elapsedMs / totalMs, 0), 1)
 
   const msRemaining = Math.max(nextBirthday.getTime() - now.getTime(), 0)
-  const dayMs = 1000 * 60 * 60 * 24
-  const daysRemaining = Math.floor(msRemaining / dayMs)
-  const hoursRemaining = Math.floor((msRemaining % dayMs) / (1000 * 60 * 60))
 
-  return { age, progress, daysRemaining, hoursRemaining }
+  return {
+    age,
+    progress,
+    msRemaining,
+    daysRemaining: Math.floor(msRemaining / DAY_MS),
+    hoursRemaining: Math.floor((msRemaining % DAY_MS) / HOUR_MS),
+    minutesRemaining: Math.floor((msRemaining % HOUR_MS) / MINUTE_MS),
+    secondsRemaining: Math.floor((msRemaining % MINUTE_MS) / 1000),
+    millisecondsRemaining: Math.floor(msRemaining % 1000),
+  }
 }
 
 function ProgressRing({
@@ -81,13 +95,42 @@ function ProgressRing({
   )
 }
 
+function CountdownUnit({
+  value,
+  places,
+  label,
+}: {
+  value: number
+  places: number[]
+  label: string
+}) {
+  return (
+    <div className="flex flex-col items-center">
+      <Counter
+        value={value}
+        places={places}
+        fontSize={22}
+        padding={2}
+        gap={1}
+        textColor="white"
+        fontWeight={700}
+        gradientHeight={0}
+        gradientFrom="transparent"
+        gradientTo="transparent"
+        horizontalPadding={0}
+      />
+      <span className="mt-2 text-[9px] text-gray-500 tracking-[0.2em] uppercase">{label}</span>
+    </div>
+  )
+}
+
 /**
  * A quiet, self-updating badge showing Adil's current age — the React Bits
  * "Counter" slot-machine digit roll (https://reactbits.dev/components/counter)
  * inside a thin ring that empties anticlockwise as the year runs from one
  * birthday (20 August) to the next, resetting the moment the next birthday
- * arrives. Below it, a live Days/Hours countdown to the next birthday uses
- * the same rolling-digit counter.
+ * arrives. Below it, a live Days/Hours/Minutes/Seconds/Milliseconds
+ * countdown to the next birthday uses the same rolling-digit counter.
  */
 export function BirthdayCounter() {
   const [info, setInfo] = useState<BirthdayInfo>(() => getBirthdayInfo(new Date()))
@@ -95,7 +138,8 @@ export function BirthdayCounter() {
   useEffect(() => {
     const update = () => setInfo(getBirthdayInfo(new Date()))
     update()
-    const interval = setInterval(update, 1000)
+    // Fast enough to keep the milliseconds digits rolling smoothly.
+    const interval = setInterval(update, 30)
     return () => clearInterval(interval)
   }, [])
 
@@ -128,44 +172,17 @@ export function BirthdayCounter() {
           />
         </div>
 
-        {info.daysRemaining === 0 && info.hoursRemaining === 0 ? (
+        {info.msRemaining === 0 ? (
           <span className="mt-8 text-xs text-gray-500 tracking-widest uppercase text-center">
             Happy birthday, Adil
           </span>
         ) : (
-          <div className="mt-8 flex items-start gap-8">
-            <div className="flex flex-col items-center">
-              <Counter
-                value={info.daysRemaining}
-                places={[100, 10, 1]}
-                fontSize={28}
-                padding={2}
-                gap={2}
-                textColor="white"
-                fontWeight={700}
-                gradientHeight={0}
-                gradientFrom="transparent"
-                gradientTo="transparent"
-                horizontalPadding={0}
-              />
-              <span className="mt-2 text-[10px] text-gray-500 tracking-[0.25em] uppercase">Days</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Counter
-                value={info.hoursRemaining}
-                places={[10, 1]}
-                fontSize={28}
-                padding={2}
-                gap={2}
-                textColor="white"
-                fontWeight={700}
-                gradientHeight={0}
-                gradientFrom="transparent"
-                gradientTo="transparent"
-                horizontalPadding={0}
-              />
-              <span className="mt-2 text-[10px] text-gray-500 tracking-[0.25em] uppercase">Hours</span>
-            </div>
+          <div className="mt-8 flex items-start justify-center gap-4 sm:gap-6 flex-wrap max-w-xs sm:max-w-none">
+            <CountdownUnit value={info.daysRemaining} places={[100, 10, 1]} label="Days" />
+            <CountdownUnit value={info.hoursRemaining} places={[10, 1]} label="Hours" />
+            <CountdownUnit value={info.minutesRemaining} places={[10, 1]} label="Min" />
+            <CountdownUnit value={info.secondsRemaining} places={[10, 1]} label="Sec" />
+            <CountdownUnit value={info.millisecondsRemaining} places={[100, 10, 1]} label="Ms" />
           </div>
         )}
         <span className="mt-4 text-[10px] text-gray-600 tracking-[0.25em] uppercase text-center">
