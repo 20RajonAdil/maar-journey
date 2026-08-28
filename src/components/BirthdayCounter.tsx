@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Counter from './Counter'
+import { BorderGlow } from './BorderGlow'
 
 // 20 August 2009
 const BIRTH_MONTH = 7 // 0-indexed: August
@@ -152,42 +153,55 @@ export function BirthdayCounter() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="flex flex-col items-center"
       >
-        <span className="text-xs text-gray-500 tracking-[0.3em] uppercase mb-6">Age</span>
+        <BorderGlow
+          edgeSensitivity={27}
+          glowColor="40 80 80"
+          backgroundColor="#0a0a0a"
+          borderRadius={18}
+          glowRadius={48}
+          glowIntensity={1.0}
+          coneSpread={35}
+          animated={false}
+          colors={['#c084fc', '#f472b6', '#38bdf8']}
+        >
+          <div className="flex flex-col items-center px-10 py-10 md:px-14 md:py-12">
+            <span className="text-xs text-gray-500 tracking-[0.3em] uppercase mb-6">Age</span>
 
-        <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-          <ProgressRing progress={info.progress} size={size} />
-          <Counter
-            value={info.age}
-            fontSize={64}
-            padding={2}
-            gap={2}
-            textColor="white"
-            fontWeight={900}
-            gradientHeight={0}
-            gradientFrom="transparent"
-            gradientTo="transparent"
-            horizontalPadding={0}
-          />
-        </div>
+            <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+              <ProgressRing progress={info.progress} size={size} />
+              <Counter
+                value={info.age}
+                fontSize={64}
+                padding={2}
+                gap={2}
+                textColor="white"
+                fontWeight={900}
+                gradientHeight={0}
+                gradientFrom="transparent"
+                gradientTo="transparent"
+                horizontalPadding={0}
+              />
+            </div>
 
-        {info.msRemaining === 0 ? (
-          <span className="mt-8 text-xs text-gray-500 tracking-widest uppercase text-center">
-            Happy birthday, Adil
-          </span>
-        ) : (
-          <div className="mt-8 flex items-start justify-center gap-4 sm:gap-6 flex-wrap max-w-xs sm:max-w-none">
-            <CountdownUnit value={info.daysRemaining} places={[100, 10, 1]} label="Days" />
-            <CountdownUnit value={info.hoursRemaining} places={[10, 1]} label="Hours" />
-            <CountdownUnit value={info.minutesRemaining} places={[10, 1]} label="Min" />
-            <CountdownUnit value={info.secondsRemaining} places={[10, 1]} label="Sec" />
-            <CountdownUnit value={info.millisecondsRemaining} places={[100, 10, 1]} label="Ms" />
+            {info.msRemaining === 0 ? (
+              <span className="mt-8 text-xs text-gray-500 tracking-widest uppercase text-center">
+                Happy birthday, Adil
+              </span>
+            ) : (
+              <div className="mt-8 flex items-start justify-center gap-4 sm:gap-6 flex-wrap max-w-xs sm:max-w-none">
+                <CountdownUnit value={info.daysRemaining} places={[100, 10, 1]} label="Days" />
+                <CountdownUnit value={info.hoursRemaining} places={[10, 1]} label="Hours" />
+                <CountdownUnit value={info.minutesRemaining} places={[10, 1]} label="Min" />
+                <CountdownUnit value={info.secondsRemaining} places={[10, 1]} label="Sec" />
+                <CountdownUnit value={info.millisecondsRemaining} places={[100, 10, 1]} label="Ms" />
+              </div>
+            )}
+            <span className="mt-4 text-[10px] text-gray-600 tracking-[0.25em] uppercase text-center">
+              Until 20 August
+            </span>
           </div>
-        )}
-        <span className="mt-4 text-[10px] text-gray-600 tracking-[0.25em] uppercase text-center">
-          Until 20 August
-        </span>
+        </BorderGlow>
       </motion.div>
     </section>
   )
