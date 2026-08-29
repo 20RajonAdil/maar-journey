@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion'
 import SplitText from './SplitText'
 import { TiltFrame } from './TiltFrame'
@@ -21,7 +22,7 @@ export function Friendship() {
 
         <SplitText
           as="h2"
-          text={"IFNAN · TALHA\n· MOHAIZ"}
+          text={"IFNAN · TALHA\n· MOHAIZ · ADIL"}
           className="font-display text-[10vw] lg:text-section leading-none tracking-tight mb-12 lg:mb-16"
           splitType="chars"
           delay={30}
@@ -41,8 +42,8 @@ export function Friendship() {
           different stages of education and life, Adil met many people, but only a few
           became genuinely close and trusted friends. Each friendship developed in its
           own way, through conversations, shared experiences, support, and the simple
-          moments of spending time together. Among those friendships, Ifnan, Talha, and
-          Mohaiz became three of the closest people in his life.
+          moments of spending time together. Among those friendships, Ifnan, Talha,
+          Mohaiz, and Adil became four of the closest people in his life.
         </motion.p>
 
         <div className="space-y-24 lg:space-y-32">
@@ -241,6 +242,69 @@ export function Friendship() {
               </div>
             </motion.div>
           </div>
+
+          {/* Adil Hassan */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
+            <motion.div {...fadeInUp}>
+              <figure>
+                <TiltFrame>
+                  <ResilientImage
+                    src="/images/friendship4.jpg"
+                    alt="Adil Hassan — a bond like brothers"
+                    className="w-auto h-auto max-w-full max-h-[70vh] object-contain"
+                  />
+                </TiltFrame>
+                <figcaption className="mt-4 text-xs text-gray-500 tracking-widest uppercase">
+                  Adil Hassan — met in Year 11
+                </figcaption>
+              </figure>
+            </motion.div>
+
+            <motion.div
+              {...fadeInUp}
+              transition={{ ...fadeInUp.transition, delay: 0.2 }}
+              className="flex items-center"
+            >
+              <div>
+                <h3 className="text-xl lg:text-2xl font-light text-white mb-4">
+                  Adil Hassan — A Bond Like Brothers
+                </h3>
+                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
+                  Adil met Adil Hassan when he was in Year 11, while Adil Hassan was still
+                  in Year 7. Despite the difference in year groups, the two started talking
+                  to each other, and what began as simple conversation slowly grew into one
+                  of the closest friendships in the MAAR Journey.
+                </p>
+                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
+                  Sharing the same first name was almost fitting, because the closeness
+                  between them often felt like more than friendship. People around them
+                  regularly asked whether the two were actually brothers, and in many ways,
+                  they acted like it too. Adil Hassan's behaviour toward him carried the
+                  same warmth, honesty, and care that a brother would show.
+                </p>
+                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
+                  What made the friendship stand out most was how well Adil Hassan
+                  listened. He genuinely understood Adil, took the time to hear him out,
+                  and the two found that they shared a very similar mindset. That shared
+                  way of thinking made it easy for them to relate to one another and speak
+                  openly, without needing to explain much.
+                </p>
+                <p className="text-gray-400 leading-relaxed mb-4 text-sm lg:text-base">
+                  Their friendship also carried a spiritual dimension. The two would go to
+                  the mosque together to pray, and that shared practice of faith became a
+                  meaningful part of their relationship in Islam. It was not only a
+                  friendship built on conversation and time spent together, but one
+                  strengthened by a shared spiritual connection.
+                </p>
+                <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
+                  For Adil, Adil Hassan became one of the best friends he ever made—someone
+                  who listened, understood, and shared both a mindset and a faith with him.
+                  Their bond, often mistaken for brotherhood, remains one of the most
+                  genuine friendships along the MAAR Journey.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Closing — The People Along the MAAR Journey */}
@@ -250,8 +314,8 @@ export function Friendship() {
           </h3>
 
           <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-6">
-            The friendships with Ifnan, Talha, and Mohaiz are three different stories,
-            but each has its own place in the MAAR Journey.
+            The friendships with Ifnan, Talha, Mohaiz, and Adil Hassan are four different
+            stories, but each has its own place in the MAAR Journey.
           </p>
 
           <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-6">
@@ -259,7 +323,9 @@ export function Friendship() {
             distance, and eventually found its way back in college. Talha represents a
             friendship built from a simple first meeting and strengthened through loyalty,
             communication, and reliability. Mohaiz represents a friendship built through
-            trust, openness, shared experiences, and a similar way of thinking.
+            trust, openness, shared experiences, and a similar way of thinking. And Adil
+            Hassan represents a bond so close it was often mistaken for brotherhood—built
+            on understanding, a shared mindset, and a shared faith.
           </p>
 
           <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-6">
@@ -270,7 +336,7 @@ export function Friendship() {
           </p>
 
           <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
-            For Adil, these three friendships became part of the story—not because
+            For Adil, these four friendships became part of the story—not because
             everything was always perfect, but because they were built through real
             experiences, trust, understanding, and the willingness to be there for one
             another.
