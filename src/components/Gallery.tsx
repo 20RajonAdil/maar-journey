@@ -18,7 +18,7 @@ interface GalleryPhoto {
 }
 
 // Reuses every photograph already featured across the MAAR Journey —
-// plus the three new Chapter Eleven friendship photographs — from the
+// plus the four Chapter Eleven friendship photographs — from the
 // same /public/images directory the rest of the site draws from.
 // No files are duplicated; this is purely a new view onto them.
 const photos: GalleryPhoto[] = [
@@ -37,6 +37,7 @@ const photos: GalleryPhoto[] = [
   { src: '/images/friendship1.jpg', alt: 'Ifnan — a friendship that found its way back', caption: 'Ifnan — Chapter Eleven, Friendship' },
   { src: '/images/friendship2.jpg', alt: 'Talha — a friend built on loyalty', caption: 'Talha — Chapter Eleven, Friendship' },
   { src: '/images/friendship3.jpg', alt: 'Mohaiz — a friendship built on understanding', caption: 'Mohaiz — Chapter Eleven, Friendship' },
+  { src: '/images/friendship4.jpg', alt: 'Adil Hassan — a bond like brothers', caption: 'Adil Hassan — Chapter Eleven, Friendship' },
   { src: '/images/future.jpg', alt: 'Vision for the future', caption: 'Vision for the future' },
 ]
 
