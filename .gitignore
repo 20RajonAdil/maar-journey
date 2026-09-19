@@ -1,5 +1,8 @@
-node_modules
-dist
-dist-ssr
+
+# build output
 *.local
 .DS_Store
+dist
+dist-ssr
+dist/
+node_modules
