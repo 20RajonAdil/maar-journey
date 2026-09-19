@@ -80,3 +80,7 @@ British Bangladeshi student and self-taught web developer.
 Copyright © 2026 MD Adil Rajon. All rights reserved.
 
 See [LICENSE](./LICENSE) for full terms.
+
+## Offline support
+
+This app works fully offline as a PWA — it caches itself for offline use automatically, no manual download step required.
