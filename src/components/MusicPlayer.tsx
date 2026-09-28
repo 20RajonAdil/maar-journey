@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Download, Pause, Play, RotateCw, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react'
+import { Download, Navigation2, Pause, Play, RotateCw, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react'
+import { SONG_CUES, type SongCue } from '@/lib/songCues'
 
 const SRC = '/audio/maar-journey.mp3'
 const TITLE = 'MAAR Journey'
@@ -82,6 +83,62 @@ export function MusicPlayer() {
   const [volume, setVolume] = useState(0.9)
   const [muted, setMuted] = useState(false)
   const [scrub, setScrub] = useState<number | null>(null)
+  const [follow, setFollow] = useState(true)
+  const followRef = useRef(true)
+  const sectionRef = useRef<HTMLElement>(null)
+  const lastCueRef = useRef(-1)
+  const syncMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('sync')
+  const [cues, setCues] = useState<SongCue[]>(SONG_CUES)
+  const cuesRef = useRef(cues)
+  cuesRef.current = cues
+  const [copied, setCopied] = useState(false)
+
+  const cueIndexAt = (t: number) => {
+    let idx = 0
+    cuesRef.current.forEach((c, i) => {
+      if (c.t <= t) idx = i
+    })
+    return idx
+  }
+  const activeCue = cues[cueIndexAt(time)]
+
+  useEffect(() => {
+    followRef.current = follow
+  }, [follow])
+
+  // If the visitor scrolls by hand, stop steering the page so we never fight them.
+  useEffect(() => {
+    const off = () => setFollow(false)
+    const onKey = (e: KeyboardEvent) => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.key)) off()
+    }
+    window.addEventListener('wheel', off, { passive: true })
+    window.addEventListener('touchmove', off, { passive: true })
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('wheel', off)
+      window.removeEventListener('touchmove', off)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [])
+
+  const goToCue = useCallback((i: number) => {
+    const cue = cuesRef.current[i]
+    if (!cue) return
+    const el = cue.id === 'music' ? sectionRef.current : document.getElementById(cue.id)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
+  // Follow the song
+  useEffect(() => {
+    if (!playing || !follow) return
+    const i = cueIndexAt(time)
+    if (i !== lastCueRef.current) {
+      lastCueRef.current = i
+      goToCue(i)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [time, playing, follow, goToCue])
 
   const setupAudioGraph = useCallback(() => {
     const el = audioRef.current
@@ -183,7 +240,7 @@ export function MusicPlayer() {
   const pct = duration ? (shown / duration) * 100 : 0
 
   return (
-    <section className="relative py-16 md:py-24 px-6 overflow-hidden">
+    <section id="music" ref={sectionRef} className="relative py-16 md:py-24 px-6 overflow-hidden">
       {/* ambient glow from the cover */}
       <div
         aria-hidden
@@ -210,6 +267,34 @@ export function MusicPlayer() {
           <span className="text-[10px] tracking-[0.35em] uppercase text-white/45">Original song</span>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">{TITLE}</h2>
           <p className="mt-1 text-sm text-white/55">{ARTIST}</p>
+
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => {
+                const next = !follow
+                setFollow(next)
+                if (next) {
+                  lastCueRef.current = -1
+                }
+              }}
+              aria-pressed={follow}
+              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] uppercase tracking-[0.2em] backdrop-blur-xl transition ${
+                follow ? 'border-white/40 bg-white/15 text-white' : 'border-white/15 bg-white/[0.04] text-white/50 hover:text-white'
+              }`}
+            >
+              <Navigation2 className={`h-3 w-3 ${follow ? 'fill-current' : ''}`} />
+              Follow the song {follow ? 'on' : 'off'}
+            </button>
+            <motion.span
+              key={activeCue.label}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: playing ? 1 : 0.5, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="min-w-0 truncate text-xs italic text-white/60"
+            >
+              {playing || time > 0 ? activeCue.label : 'Press play — the page will follow the story'}
+            </motion.span>
+          </div>
 
           <canvas ref={canvasRef} className="mt-6 h-20 w-full" aria-hidden />
 
@@ -297,6 +382,43 @@ export function MusicPlayer() {
         </div>
       </motion.div>
 
+      {syncMode && (
+        <div className="relative mx-auto mt-6 max-w-4xl rounded-2xl border border-amber-300/30 bg-black/60 p-5 text-xs text-white/80 backdrop-blur-xl">
+          <p className="mb-3 text-amber-200">
+            Sync mode — play the song, and click <b>Set</b> next to a part the moment the song starts talking about it. Then press Copy and send it over.
+          </p>
+          <ul className="space-y-1.5">
+            {cues.map((c, i) => (
+              <li key={i} className="flex items-center gap-3">
+                <span className="w-12 tabular-nums text-white/50">{fmt(c.t)}</span>
+                <span className="flex-1 truncate">
+                  <span className="text-white/40">#{c.id}</span> {c.label}
+                </span>
+                <button
+                  className="rounded-full border border-white/20 px-3 py-1 hover:bg-white/10"
+                  onClick={() => setCues((cs) => cs.map((x, j) => (j === i ? { ...x, t: Math.round((audioRef.current?.currentTime ?? 0) * 10) / 10 } : x)))}
+                >
+                  Set to now
+                </button>
+                <button className="rounded-full border border-white/20 px-3 py-1 hover:bg-white/10" onClick={() => { if (audioRef.current) audioRef.current.currentTime = c.t }}>
+                  Go
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            className="mt-4 rounded-full bg-amber-200 px-4 py-2 font-medium text-black"
+            onClick={() => {
+              navigator.clipboard?.writeText(JSON.stringify(cues.map(({ t, id }) => ({ t, id })), null, 1))
+              setCopied(true)
+              setTimeout(() => setCopied(false), 2000)
+            }}
+          >
+            {copied ? 'Copied!' : 'Copy timings'}
+          </button>
+        </div>
+      )}
+
       <audio
         ref={audioRef}
         src={SRC}
@@ -307,6 +429,9 @@ export function MusicPlayer() {
         onPlay={() => {
           playingRef.current = true
           setPlaying(true)
+          // pressing play (re)starts the guided tour, even if the visitor scrolled here by hand
+          lastCueRef.current = -1
+          setFollow(true)
         }}
         onPause={() => {
           playingRef.current = false
