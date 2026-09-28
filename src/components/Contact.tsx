@@ -8,6 +8,11 @@ const links = [
     href: 'mailto:20rajona@gmail.com',
   },
   {
+    label: 'YouTube',
+    value: '@MAAR-NASHID',
+    href: 'https://www.youtube.com/@MAAR-NASHID',
+  },
+  {
     label: 'GitHub',
     value: 'github.com/20RajonAdil',
     href: 'https://github.com/20RajonAdil',
