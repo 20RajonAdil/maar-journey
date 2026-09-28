@@ -111,22 +111,41 @@ export function MusicPlayer() {
     followRef.current = follow
   }, [follow])
 
-  // If the visitor scrolls by hand, stop steering the page so we never fight them.
+  // If the visitor scrolls or touches by hand, step back for a moment so we
+  // never fight them — the song keeps playing the whole time. Ten seconds
+  // after their last touch, following resumes on its own, right where the
+  // song has got to. The "Follow the song" button is the separate, lasting
+  // on/off switch — this timer only ever pauses, never switches it off.
+  const [interacting, setInteracting] = useState(false)
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   useEffect(() => {
-    const off = () => {
+    const pauseForInteraction = () => {
+      if (!followRef.current) return
       cancelAnimationFrame(scrollRaf.current)
-      setFollow(false)
+      setInteracting(true)
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+      resumeTimerRef.current = setTimeout(() => {
+        // Jump the "last seen" cue back so the very next tick re-syncs to
+        // wherever the song actually is now, even if several cues passed
+        // while the visitor was reading.
+        lastCueRef.current = -1
+        setInteracting(false)
+      }, 10000)
     }
     const onKey = (e: KeyboardEvent) => {
-      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.key)) off()
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.key)) pauseForInteraction()
     }
-    window.addEventListener('wheel', off, { passive: true })
-    window.addEventListener('touchmove', off, { passive: true })
+    window.addEventListener('wheel', pauseForInteraction, { passive: true })
+    window.addEventListener('touchmove', pauseForInteraction, { passive: true })
+    window.addEventListener('touchstart', pauseForInteraction, { passive: true })
     window.addEventListener('keydown', onKey)
     return () => {
-      window.removeEventListener('wheel', off)
-      window.removeEventListener('touchmove', off)
+      window.removeEventListener('wheel', pauseForInteraction)
+      window.removeEventListener('touchmove', pauseForInteraction)
+      window.removeEventListener('touchstart', pauseForInteraction)
       window.removeEventListener('keydown', onKey)
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
     }
   }, [])
 
@@ -177,14 +196,14 @@ export function MusicPlayer() {
 
   // Follow the song
   useEffect(() => {
-    if (!playing || !follow) return
+    if (!playing || !follow || interacting) return
     const i = cueIndexAt(time)
     if (i !== lastCueRef.current) {
       lastCueRef.current = i
       goToCue(i)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, playing, follow, goToCue])
+  }, [time, playing, follow, interacting, goToCue])
 
   const setupAudioGraph = useCallback(() => {
     const el = audioRef.current
@@ -402,6 +421,8 @@ export function MusicPlayer() {
               onClick={() => {
                 const next = !follow
                 setFollow(next)
+                if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+                setInteracting(false)
                 if (next) {
                   lastCueRef.current = -1
                 }
@@ -412,7 +433,7 @@ export function MusicPlayer() {
               }`}
             >
               <Navigation2 className={`h-3 w-3 ${follow ? 'fill-current' : ''}`} />
-              Follow the song {follow ? 'on' : 'off'}
+              Follow the song {follow ? (interacting ? 'on · resuming' : 'on') : 'off'}
             </button>
           </div>
 
@@ -552,6 +573,8 @@ export function MusicPlayer() {
           // pressing play (re)starts the guided tour, even if the visitor scrolled here by hand
           lastCueRef.current = -1
           setFollow(true)
+          if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+          setInteracting(false)
         }}
         onPause={() => {
           playingRef.current = false
