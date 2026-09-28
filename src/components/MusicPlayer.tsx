@@ -5,7 +5,7 @@ import { SONG_CUES, type SongCue } from '@/lib/songCues'
 import { SONG_KEYWORDS } from '@/lib/songKeywords'
 
 const SRC = '/audio/maar-journey.mp3'
-const TITLE = 'This is MAAR Journey'
+const TITLE = 'This is my MAAR Journey'
 const ARTIST = 'MD Adil Rajon'
 const COVER = '/images/song-cover.png'
 const BARS = 56
