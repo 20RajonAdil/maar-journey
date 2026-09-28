@@ -85,6 +85,7 @@ export function MusicPlayer() {
   const [muted, setMuted] = useState(false)
   const [scrub, setScrub] = useState<number | null>(null)
   const [follow, setFollow] = useState(true)
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null)
   const followRef = useRef(true)
   const sectionRef = useRef<HTMLElement>(null)
   const lastCueRef = useRef(-1)
@@ -223,7 +224,50 @@ export function MusicPlayer() {
     if (el) el.volume = muted ? 0 : volume
   }, [volume, muted])
 
-  // Visualizer
+  // Keep the screen from locking while the song is playing, so a lyric-cued
+  // scroll never fires into a dark screen. Falls back to doing nothing on
+  // browsers that don't support the Wake Lock API (older Safari, etc).
+  useEffect(() => {
+    if (!('wakeLock' in navigator)) return
+    let cancelled = false
+    const release = () => {
+      wakeLockRef.current?.release().catch(() => {})
+      wakeLockRef.current = null
+    }
+    const acquire = async () => {
+      try {
+        const lock = await (navigator as any).wakeLock.request('screen')
+        if (cancelled) {
+          lock.release().catch(() => {})
+          return
+        }
+        wakeLockRef.current = lock
+      } catch {
+        /* denied or unsupported right now — playback still works fine */
+      }
+    }
+    if (playing) acquire()
+    else release()
+
+    // iOS/Android release the lock whenever the tab is backgrounded; grab it
+    // back the moment the visitor returns, if the song is still playing.
+    const onVis = () => {
+      if (!document.hidden && playing && !wakeLockRef.current) acquire()
+    }
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      cancelled = true
+      document.removeEventListener('visibilitychange', onVis)
+    }
+  }, [playing])
+
+  useEffect(() => () => {
+    wakeLockRef.current?.release().catch(() => {})
+  }, [])
+
+  // Visualizer — only spends CPU while its section is on screen and the tab
+  // is in the foreground; idles at a low frame rate the rest of the time so
+  // the page can't quietly cook a laptop's fan or drain a phone battery.
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -231,6 +275,8 @@ export function MusicPlayer() {
     if (!g) return
     let raf = 0
     let t = 0
+    let visible = true
+    let frameCount = 0
     const data = new Uint8Array(128)
 
     const resize = () => {
@@ -243,9 +289,17 @@ export function MusicPlayer() {
     resize()
     const ro = new ResizeObserver(resize)
     ro.observe(canvas)
+    const io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting), { threshold: 0 })
+    io.observe(canvas)
 
     const draw = () => {
       raf = requestAnimationFrame(draw)
+      const active = playingRef.current
+      // Skip most frames when paused/off-screen/backgrounded — still redraws
+      // a few times a second so the idle wave doesn't look frozen.
+      frameCount++
+      if (document.hidden || (!visible && !active)) return
+      if (!active && frameCount % 4 !== 0) return
       t += 0.03
       const { width: w, height: h } = canvas.getBoundingClientRect()
       g.clearRect(0, 0, w, h)
@@ -278,6 +332,7 @@ export function MusicPlayer() {
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
+      io.disconnect()
     }
   }, [])
 

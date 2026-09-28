@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Counter from './Counter'
 
@@ -135,18 +135,55 @@ function CountdownUnit({
 export function BirthdayCounter() {
   const [info, setInfo] = useState<BirthdayInfo>(() => getBirthdayInfo(new Date()))
 
+  const rootRef = useRef<HTMLElement>(null)
+
   useEffect(() => {
     const update = () => setInfo(getBirthdayInfo(new Date()))
     update()
-    // Fast enough to keep the milliseconds digits rolling smoothly.
-    const interval = setInterval(update, 30)
-    return () => clearInterval(interval)
+
+    let interval: ReturnType<typeof setInterval> | null = null
+    let visible = true
+
+    // Only spend CPU rolling the milliseconds digits while this section is
+    // actually on screen and the tab is in the foreground — that alone is
+    // what was keeping the page busy (and phones/laptops warm) forever.
+    const start = () => {
+      if (interval) return
+      interval = setInterval(update, document.hidden || !visible ? 1000 : 30)
+    }
+    const stop = () => {
+      if (interval) clearInterval(interval)
+      interval = null
+    }
+    const restart = () => {
+      stop()
+      if (visible) start()
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        restart()
+      },
+      { threshold: 0 },
+    )
+    if (rootRef.current) io.observe(rootRef.current)
+
+    const onVis = () => restart()
+    document.addEventListener('visibilitychange', onVis)
+
+    start()
+    return () => {
+      stop()
+      io.disconnect()
+      document.removeEventListener('visibilitychange', onVis)
+    }
   }, [])
 
   const size = 176
 
   return (
-    <section className="py-16 md:py-20 flex flex-col items-center justify-center">
+    <section ref={rootRef} className="py-16 md:py-20 flex flex-col items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}

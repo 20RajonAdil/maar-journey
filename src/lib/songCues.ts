@@ -34,6 +34,7 @@ export const SONG_CUES: SongCue[] = [
   { t: 250.7, keyword: 'Mohaiz', id: 'friendship', find: 'Mohaiz —', label: '"Mohaiz" — understanding' },
   { t: 253.2, keyword: 'Adil', id: 'friendship', find: 'Adil Hassan —', label: '"Adil Hassan" — a bond like brothers' },
   { t: 269.3, keyword: 'Maybe', id: 'gallery', label: '"Look behind" — the gallery' },
+  { t: 297.2, keyword: 'seed', id: 'faith', find: 'plants the seeds', label: '"Every day plants a seed" — the favourite phrase' },
   { t: 309, keyword: 'perfect', id: 'vision', label: '"Still becoming" — values & vision' },
   { t: 361.5, keyword: 'chapter', id: 'contact', label: '"Just another chapter" — the next one' },
 ]
