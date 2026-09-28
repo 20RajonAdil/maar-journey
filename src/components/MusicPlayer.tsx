@@ -409,7 +409,7 @@ export function MusicPlayer() {
           <button
             className="mt-4 rounded-full bg-amber-200 px-4 py-2 font-medium text-black"
             onClick={() => {
-              navigator.clipboard?.writeText(JSON.stringify(cues.map(({ t, id }) => ({ t, id })), null, 1))
+              navigator.clipboard?.writeText(JSON.stringify(cues.map(({ t, id, keyword }) => ({ t, id, keyword })), null, 1))
               setCopied(true)
               setTimeout(() => setCopied(false), 2000)
             }}
