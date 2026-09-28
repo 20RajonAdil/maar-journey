@@ -5,7 +5,7 @@ import { SONG_CUES, type SongCue } from '@/lib/songCues'
 import { SONG_KEYWORDS } from '@/lib/songKeywords'
 
 const SRC = '/audio/maar-journey.mp3'
-const TITLE = 'MAAR Journey'
+const TITLE = 'This is MAAR Journey'
 const ARTIST = 'MD Adil Rajon'
 const COVER = '/images/song-cover.png'
 const BARS = 56
@@ -63,7 +63,7 @@ function FlipCard({ playing }: { playing: boolean }) {
             From a dream to a direction…<br />
             This isn't the end of the story.
           </p>
-          <span className="text-[10px] tracking-[0.25em] uppercase text-white/40">www_mdadil2026</span>
+          <span className="text-[10px] tracking-[0.25em] uppercase text-white/40">MD ADIL RAJON</span>
         </div>
       </motion.div>
     </div>
