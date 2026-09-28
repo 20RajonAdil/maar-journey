@@ -112,7 +112,10 @@ export function MusicPlayer() {
 
   // If the visitor scrolls by hand, stop steering the page so we never fight them.
   useEffect(() => {
-    const off = () => setFollow(false)
+    const off = () => {
+      cancelAnimationFrame(scrollRaf.current)
+      setFollow(false)
+    }
     const onKey = (e: KeyboardEvent) => {
       if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(e.key)) off()
     }
@@ -126,12 +129,50 @@ export function MusicPlayer() {
     }
   }, [])
 
-  const goToCue = useCallback((i: number) => {
-    const cue = cuesRef.current[i]
-    if (!cue) return
-    const el = cue.id === 'music' ? sectionRef.current : document.getElementById(cue.id)
-    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const scrollRaf = useRef(0)
+
+  /** Glide to a target that is re-measured every frame, so late image loads or animations can't knock it off course. */
+  const glideTo = useCallback((getY: () => number) => {
+    cancelAnimationFrame(scrollRaf.current)
+    const start = window.scrollY
+    const t0 = performance.now()
+    const dur = Math.min(2400, Math.max(1000, Math.abs(getY() - start) * 0.25))
+    const step = (now: number) => {
+      const p = Math.min(1, (now - t0) / dur)
+      const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2
+      const target = getY()
+      window.scrollTo({ top: start + (target - start) * e, behavior: 'instant' as ScrollBehavior })
+      // after arriving, keep correcting for ~1.5s in case the layout shifts
+      if (p < 1 || now - t0 < dur + 1500) scrollRaf.current = requestAnimationFrame(step)
+    }
+    scrollRaf.current = requestAnimationFrame(step)
   }, [])
+
+  const goToCue = useCallback(
+    (i: number) => {
+      const cue = cuesRef.current[i]
+      if (!cue) return
+      const section = cue.id === 'music' ? sectionRef.current : document.getElementById(cue.id)
+      if (!section) return
+      const findTarget = (): HTMLElement => {
+        if (!cue.find) return section
+        const needle = cue.find.toLowerCase()
+        let best: HTMLElement | null = null
+        section.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,p,span,li,div').forEach((el) => {
+          const txt = (el.textContent || '').toLowerCase()
+          if (txt.includes(needle) && (!best || txt.length < (best.textContent || '').length)) best = el
+        })
+        return best ?? section
+      }
+      const target = findTarget()
+      glideTo(() => {
+        const top = target.getBoundingClientRect().top + window.scrollY
+        // sub-topics sit a little below the top so the heading and its content are both in view
+        return Math.max(0, cue.find && target !== section ? top - window.innerHeight * 0.25 : top)
+      })
+    },
+    [glideTo],
+  )
 
   // Follow the song
   useEffect(() => {
