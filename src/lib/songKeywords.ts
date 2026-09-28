@@ -1,0 +1,53 @@
+/** Keywords shown under the cover while the song says them. Times were detected automatically. */
+export interface SongKeyword {
+  t: number
+  word: string
+  tag: string
+}
+
+export const SONG_KEYWORDS: SongKeyword[] = [
+  { t: 2.1, word: "Sylhet", tag: "Intro" },
+  { t: 3.6, word: "Birmingham", tag: "Intro" },
+  { t: 29.2, word: "Sylhet", tag: "Where it began" },
+  { t: 33.0, word: "Faith", tag: "Where it began" },
+  { t: 37.8, word: "Golden pages", tag: "Education" },
+  { t: 42.3, word: "First in class", tag: "Education" },
+  { t: 47.7, word: "Broken arm", tag: "Challenges" },
+  { t: 57.9, word: "Leaving home", tag: "Journey" },
+  { t: 63.0, word: "London", tag: "Journey" },
+  { t: 69.5, word: "MAAR Journey", tag: "Chorus" },
+  { t: 105.6, word: "Heathrow", tag: "Journey" },
+  { t: 107.0, word: "21 days", tag: "Journey" },
+  { t: 112.2, word: "Handsworth", tag: "A new beginning" },
+  { t: 119.4, word: "Aston", tag: "A new beginning" },
+  { t: 124.2, word: "School days", tag: "Education" },
+  { t: 127.0, word: "Judged", tag: "Challenges" },
+  { t: 143.9, word: "MAAR Journey", tag: "Chorus" },
+  { t: 184.3, word: "Finding me", tag: "Faith" },
+  { t: 192.7, word: "Prayer", tag: "Faith" },
+  { t: 212.6, word: "Building MAAR", tag: "Building MAAR" },
+  { t: 215.1, word: "Code", tag: "Building MAAR" },
+  { t: 217.0, word: "HTML \u00b7 CSS", tag: "Building MAAR" },
+  { t: 221.5, word: "MAAR Quran", tag: "Projects" },
+  { t: 222.2, word: "MAAR LIFE", tag: "Projects" },
+  { t: 222.9, word: "MAAR QR", tag: "Projects" },
+  { t: 245.8, word: "Ifnan", tag: "Friendship" },
+  { t: 248.3, word: "Talha", tag: "Friendship" },
+  { t: 250.7, word: "Mohaiz", tag: "Friendship" },
+  { t: 253.2, word: "Adil Hassan", tag: "Friendship" },
+  { t: 272.2, word: "Looking back", tag: "Gallery" },
+  { t: 280.3, word: "Sylhet", tag: "Breakdown" },
+  { t: 282.1, word: "Birmingham", tag: "Breakdown" },
+  { t: 284.3, word: "Struggle", tag: "Breakdown" },
+  { t: 287.2, word: "Learning", tag: "Breakdown" },
+  { t: 290.1, word: "Building", tag: "Breakdown" },
+  { t: 297.2, word: "A seed", tag: "Breakdown" },
+  { t: 310, word: "MAAR Journey", tag: "Final chorus" },
+  { t: 319.0, word: "Not perfect", tag: "Final chorus" },
+  { t: 361.7, word: "Sylhet", tag: "Outro" },
+  { t: 365.2, word: "Birmingham", tag: "Outro" },
+  { t: 366.7, word: "Faith", tag: "Outro" },
+  { t: 368.2, word: "Learning", tag: "Outro" },
+  { t: 369.4, word: "Friendship", tag: "Outro" },
+  { t: 370.9, word: "Creation", tag: "Outro" },
+]

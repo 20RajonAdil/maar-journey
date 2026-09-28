@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Download, Navigation2, Pause, Play, RotateCw, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react'
 import { SONG_CUES, type SongCue } from '@/lib/songCues'
+import { SONG_KEYWORDS } from '@/lib/songKeywords'
 
 const SRC = '/audio/maar-journey.mp3'
 const TITLE = 'MAAR Journey'
@@ -101,6 +102,9 @@ export function MusicPlayer() {
     return idx
   }
   const activeCue = cues[cueIndexAt(time)]
+  // The keyword being sung right now (shown under the cover for a few seconds).
+  const kwIndex = SONG_KEYWORDS.reduce((acc, k, i) => (k.t <= time ? i : acc), -1)
+  const activeKw = kwIndex >= 0 && time - SONG_KEYWORDS[kwIndex].t < 6 ? SONG_KEYWORDS[kwIndex] : null
 
   useEffect(() => {
     followRef.current = follow
@@ -261,6 +265,35 @@ export function MusicPlayer() {
           transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
           <FlipCard playing={playing} />
+          <div className="mt-6 flex h-24 flex-col items-center justify-start text-center" aria-live="polite">
+            <AnimatePresence mode="wait">
+              {activeKw ? (
+                <motion.div
+                  key={`${activeKw.t}-${activeKw.word}`}
+                  initial={{ opacity: 0, y: 14, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -10, filter: 'blur(8px)' }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col items-center"
+                >
+                  <span className="text-[10px] uppercase tracking-[0.35em] text-white/45">{activeKw.tag}</span>
+                  <span className="mt-1.5 bg-gradient-to-b from-white to-white/60 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl">
+                    {activeKw.word}
+                  </span>
+                </motion.div>
+              ) : (
+                <motion.span
+                  key="idle"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.45 }}
+                  exit={{ opacity: 0 }}
+                  className="mt-3 text-[10px] uppercase tracking-[0.3em] text-white"
+                >
+                  {playing ? '· · ·' : 'Press play'}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
 
         <div className="flex min-w-0 flex-col">
@@ -285,15 +318,6 @@ export function MusicPlayer() {
               <Navigation2 className={`h-3 w-3 ${follow ? 'fill-current' : ''}`} />
               Follow the song {follow ? 'on' : 'off'}
             </button>
-            <motion.span
-              key={activeCue.label}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: playing ? 1 : 0.5, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="min-w-0 truncate text-xs italic text-white/60"
-            >
-              {playing || time > 0 ? activeCue.label : 'Press play — the page will follow the story'}
-            </motion.span>
           </div>
 
           <canvas ref={canvasRef} className="mt-6 h-20 w-full" aria-hidden />
