@@ -84,9 +84,7 @@ export function MusicPlayer() {
   const [volume, setVolume] = useState(0.9)
   const [muted, setMuted] = useState(false)
   const [scrub, setScrub] = useState<number | null>(null)
-  const [follow, setFollow] = useState(true)
   const wakeLockRef = useRef<WakeLockSentinel | null>(null)
-  const followRef = useRef(true)
   const sectionRef = useRef<HTMLElement>(null)
   const lastCueRef = useRef(-1)
   const syncMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('sync')
@@ -107,21 +105,15 @@ export function MusicPlayer() {
   const kwIndex = SONG_KEYWORDS.reduce((acc, k, i) => (k.t <= time ? i : acc), -1)
   const activeKw = kwIndex >= 0 && time - SONG_KEYWORDS[kwIndex].t < 6 ? SONG_KEYWORDS[kwIndex] : null
 
-  useEffect(() => {
-    followRef.current = follow
-  }, [follow])
-
   // If the visitor scrolls or touches by hand, step back for a moment so we
   // never fight them — the song keeps playing the whole time. Ten seconds
   // after their last touch, following resumes on its own, right where the
-  // song has got to. The "Follow the song" button is the separate, lasting
-  // on/off switch — this timer only ever pauses, never switches it off.
+  // song has got to.
   const [interacting, setInteracting] = useState(false)
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const pauseForInteraction = () => {
-      if (!followRef.current) return
       cancelAnimationFrame(scrollRaf.current)
       setInteracting(true)
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
@@ -196,14 +188,14 @@ export function MusicPlayer() {
 
   // Follow the song
   useEffect(() => {
-    if (!playing || !follow || interacting) return
+    if (!playing || interacting) return
     const i = cueIndexAt(time)
     if (i !== lastCueRef.current) {
       lastCueRef.current = i
       goToCue(i)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, playing, follow, interacting, goToCue])
+  }, [time, playing, interacting, goToCue])
 
   const setupAudioGraph = useCallback(() => {
     const el = audioRef.current
@@ -417,24 +409,24 @@ export function MusicPlayer() {
           <p className="mt-1 text-sm text-white/55">{ARTIST}</p>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => {
-                const next = !follow
-                setFollow(next)
-                if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-                setInteracting(false)
-                if (next) {
-                  lastCueRef.current = -1
-                }
-              }}
-              aria-pressed={follow}
-              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] uppercase tracking-[0.2em] backdrop-blur-xl transition ${
-                follow ? 'border-white/40 bg-white/15 text-white' : 'border-white/15 bg-white/[0.04] text-white/50 hover:text-white'
-              }`}
-            >
-              <Navigation2 className={`h-3 w-3 ${follow ? 'fill-current' : ''}`} />
-              Follow the song {follow ? (interacting ? 'on · resuming' : 'on') : 'off'}
-            </button>
+            <AnimatePresence mode="wait">
+              {!playing && (
+                <motion.p
+                  key="notice"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[11px] leading-relaxed text-white/55 backdrop-blur-xl"
+                >
+                  <Navigation2 className="mt-0.5 h-3 w-3 shrink-0 text-white/40" />
+                  <span>
+                    Press play and this page will follow the song, scrolling to match the story. Feel free to scroll
+                    yourself any time — it'll pick back up a moment later.
+                  </span>
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
 
           <canvas ref={canvasRef} className="mt-6 h-20 w-full" aria-hidden />
@@ -572,7 +564,6 @@ export function MusicPlayer() {
           setPlaying(true)
           // pressing play (re)starts the guided tour, even if the visitor scrolled here by hand
           lastCueRef.current = -1
-          setFollow(true)
           if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
           setInteracting(false)
         }}
